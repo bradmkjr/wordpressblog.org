@@ -15,12 +15,16 @@ permissions:
     pages: write
     id-token: write
 
+env:
+  WWWROOT_PATH: '/var/www/html'
+
 jobs:
     build:
         runs-on: ubuntu-latest
         environment:
           name: github-pages
           url: ${{ steps.deployment.outputs.page_url }}
+          
         steps:
             - name: Checkout
               id: checkout
@@ -28,6 +32,11 @@ jobs:
             - name: Setup Pages
               id: setup_pages
               uses: actions/configure-pages@v5
+            - name: Empty wwwroot
+              run: |
+                ls ${{ env.WWWROOT_PATH }}
+                sudo rm -Rf ${{ env.WWWROOT_PATH }}/*
+                ls ${{ env.WWWROOT_PATH }}
             - name: Setup WP
               id: setup_wp
               uses: bradmkjr/install-wordpress-github-action@main
@@ -61,7 +70,7 @@ jobs:
                 # Description: WordPress Installation path
                 #
                 # Default: ${{ runner.temp }}/wordpress
-                # installation_path: ""
+                installation_path: '${{ env.WWWROOT_PATH }}'
 
                 # Description: WordPress Installation url
                 #
