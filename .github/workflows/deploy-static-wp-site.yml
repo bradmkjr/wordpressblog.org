@@ -77,11 +77,13 @@ jobs:
             - name: Install plugins
               id: install_plugins
               run: |
-                ${steps.setup_wp.outputs.wp_cli} plugin install simply-static --activate
+                echo ${{ steps.setup_wp.outputs.wp_cli }}
+                echo ${ steps.setup_wp.outputs.wp_cli }
+                ${{ steps.setup_wp.outputs.wp_cli }} plugin install simply-static --activate
             - name: Generate Static Site
               id: generate_static_site
               run: |
-                ${steps.setup_wp.outputs.wp_cli} simply-static run
+                ${{ steps.setup_wp.outputs.wp_cli }} simply-static run
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
