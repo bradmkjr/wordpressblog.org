@@ -35,7 +35,8 @@ jobs:
             - name: Enable PHP CGI
               id: enable_php_cgi
               run: |
-                sudo apt install libapache2-mod-php
+                sudo apt install libapache2-mod-php php-cgi
+                sudo /etc/init.d/apache2 restart
             - name: Empty wwwroot folder
               run: |
                 sudo rm -Rf ${{ env.WWWROOT_PATH }}/*
