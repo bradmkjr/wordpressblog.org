@@ -89,12 +89,12 @@ jobs:
               id: generate_static_site
               run: |
                 ${{ steps.setup_wp.outputs.wp_cli }} staatic publish \
-                --path='${{ steps.setup_wp.outputs.path }}/wp-content/uploads/staatic/deploy'
+                --path='${{ steps.setup_wp.outputs.path }}'
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
                   # Upload entire repository
-                  path: '${{ steps.setup_wp.outputs.path }}'
+                  path: '${{ steps.setup_wp.outputs.path }}/wp-content/uploads/staatic/deploy'
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
