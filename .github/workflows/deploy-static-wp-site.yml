@@ -32,11 +32,15 @@ jobs:
             - name: Setup Pages
               id: setup_pages
               uses: actions/configure-pages@v5
-            - name: Empty wwwroot
+            - name: Empty wwwroot folder
               run: |
-                ls ${{ env.WWWROOT_PATH }}
                 sudo rm -Rf ${{ env.WWWROOT_PATH }}/*
-                ls ${{ env.WWWROOT_PATH }}
+            - name: Change permissions on wwwroot folder
+              run: |
+                ls -l ${{ env.WWWROOT_PATH }}
+                ls -l ${{ env.WWWROOT_PATH }}/../                
+                sudo chmod -R 777 ${{ env.WWWROOT_PATH }}
+                ls -l ${{ env.WWWROOT_PATH }}
             - name: Setup WP
               id: setup_wp
               uses: bradmkjr/install-wordpress-github-action@main
