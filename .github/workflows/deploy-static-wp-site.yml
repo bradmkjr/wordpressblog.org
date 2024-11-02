@@ -78,7 +78,6 @@ jobs:
               id: install_plugins
               run: |
                 echo ${{ steps.setup_wp.outputs.wp_cli }}
-                echo ${ steps.setup_wp.outputs.wp_cli }
                 ${{ steps.setup_wp.outputs.wp_cli }} plugin install simply-static --activate
             - name: Generate Static Site
               id: generate_static_site
