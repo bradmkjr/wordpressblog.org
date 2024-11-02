@@ -1,0 +1,75 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy Static WP Site
+
+on:
+    # Runs on pushes targeting the default branch
+    push:
+      branches: ["main"]
+    
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              id: checkout
+              uses: actions/checkout@v4
+            - name: Setup Pages
+              id: setup_pages
+              uses: actions/configure-pages@v5
+            - name: Setup WP
+              id: setup_wp
+              uses: holyhope/install-wordpress-github-action@main
+              with:
+                # Description: Select which version you want to download. Accepts a version
+                # number, 'latest' or 'nightly'.
+                #
+                # Default: latest
+                wordpress_version: ""
+
+                # Description: The title of the new site.
+                #
+                # Default: WordPress
+                wordpress_title: ""
+
+                # Description: The locale/language for the installation (e.g. `de_DE`).
+                #
+                # Default: en_US
+                wordpress_locale: ""
+
+                # Description: PHP version
+                #
+                # Default: 8.2
+                php_version: ""
+
+                # Description: PHP extensions to install. Each extension should be on a new line.
+                #
+                # Default: imagick
+                php_extensions: ""
+
+                # Description: WordPress Installation path
+                #
+                # Default: ${{ runner.temp }}/wordpress
+                installation_path: ""
+
+                # Description: GitHub token
+                #
+                # Default: ${{ github.token }}
+                github_token: ""
+
+                # Description: Path to the WP-CLI binary. To use a custom version of WP-CLI, see
+                # the
+                # [`install-wp-cli` GitHub action](https://github.com/marketplace/actions/install-wp-cli)
+                # Default: Downloaded from the official WP-CLI website.
+                #
+                wp_cli_path: ""
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  # Upload entire repository
+                  path: '${{ steps.setup_wp.outputs.path }}'
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
