@@ -51,7 +51,7 @@ jobs:
                 # number, 'latest' or 'nightly'.
                 #
                 # Default: latest
-                wordpress_version: "5.6.1"
+                wordpress_version: "3.5.2"
 
                 # Description: The title of the new site.
                 #
