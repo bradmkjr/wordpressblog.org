@@ -99,7 +99,7 @@ jobs:
                 # number, 'latest' or 'nightly'.
                 #
                 # Default: latest
-                wp_cli_version: "2.1.0"
+                wp_cli_version: "v1.5.1"
             - name: Install plugins
               id: install_plugins
               run: |
