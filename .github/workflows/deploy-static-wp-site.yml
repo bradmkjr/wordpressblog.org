@@ -94,6 +94,12 @@ jobs:
                 # Default: Downloaded from the official WP-CLI website.
                 #
                 # wp_cli_path: ""
+
+                # Description: Select which version you want to download. Accepts a version
+                # number, 'latest' or 'nightly'.
+                #
+                # Default: latest
+                wp_cli_version: "1.5.1"
             - name: Install plugins
               id: install_plugins
               run: |
